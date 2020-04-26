@@ -13,7 +13,7 @@ public class ITemperature {
 	}
 
 	public void setCountry(String country) {
-		this.country = country;
+		this.country = country.toLowerCase().trim();
 	}
 
 	public String getCountry3LetterCode() {
@@ -21,7 +21,7 @@ public class ITemperature {
 	}
 
 	public void setCountry3LetterCode(String country3LetterCode) {
-		this.country3LetterCode = country3LetterCode;
+		this.country3LetterCode = country3LetterCode.toLowerCase().trim();
 	}
 
 	public String getMonth() {
@@ -29,7 +29,7 @@ public class ITemperature {
 	}
 
 	public void setMonth(String month) {
-		this.month = month;
+		this.month = month.toLowerCase().trim();
 	}
 
 	public double getTemperature() {

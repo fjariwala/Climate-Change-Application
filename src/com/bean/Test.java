@@ -13,10 +13,10 @@ public class Test {
 		IWeatherIO_DAO wDao = new IWeather_Impl();
 		List<ITemperature> data = wDao.readDataFromFile();
 		int count = 0;
-		for (ITemperature iTemperature : data) {
-			System.out.println(iTemperature);
-			count++;
-		}
+//		for (ITemperature iTemperature : data) {
+//			System.out.println(iTemperature);
+//			count++;
+//		}
 		System.out.println(count);
 	}
 }

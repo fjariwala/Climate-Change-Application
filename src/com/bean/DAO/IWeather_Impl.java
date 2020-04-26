@@ -36,7 +36,7 @@ public class IWeather_Impl implements IWeatherIO_DAO {
 		// Create castobaen and csvreader object
 		CSVReader csvReader = null;
 		try {
-			csvReader = new CSVReader(new FileReader("E:\\Fenil\\world_temp_2000-2016.csv"));
+			csvReader = new CSVReader(new FileReader("D:\\Eclipse Workspace\\world_temp_2000-2016.csv"));
 
 		} catch (FileNotFoundException e) {
 
@@ -51,12 +51,12 @@ public class IWeather_Impl implements IWeatherIO_DAO {
 		try {
 
 			List<ITemperature> list = csvToBean.parse(strategy, csvReader);
-			int count = 0;
-			for (ITemperature e : list) {
-				count++;
-				System.out.println(e);
-			}
-			System.out.println(count);
+//			int count = 0;
+//			for (ITemperature e : list) {
+//				count++;
+//				System.out.println(e);
+//			}
+//			System.out.println(count);
 			return list;
 
 		} catch (Exception e) {
