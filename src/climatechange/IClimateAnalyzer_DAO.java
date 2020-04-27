@@ -1,9 +1,7 @@
-package com.bean.DAO;
+package climatechange;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.bean.Entity.ITemperature;
 
 public interface IClimateAnalyzer_DAO {
 

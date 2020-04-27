@@ -1,9 +1,9 @@
-package com.bean.DAO;
+package climatechange;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-
-import com.bean.Entity.ITemperature;
 
 public class IClimateAnalyzer_Impl implements IClimateAnalyzer_DAO {
 
@@ -110,7 +110,7 @@ public class IClimateAnalyzer_Impl implements IClimateAnalyzer_DAO {
 		// TODO Auto-generated method stub
 
 		List<ITemperature> data = wDao.readDataFromFile();
-		List<ITemperature> treeData = null;
+		List<ITemperature> treeData = new ArrayList<ITemperature>();
 
 		for (ITemperature iTemperature : data) {
 
@@ -175,11 +175,21 @@ public class IClimateAnalyzer_Impl implements IClimateAnalyzer_DAO {
 	public List<ITemperature> allCountriesGetTop10LowestTemp(String month) {
 		// TODO Auto-generated method stub
 		List<ITemperature> data = wDao.readDataFromFile();
-		List<ITemperature> filteredData = null;
+
+		List<ITemperature> filteredData = new ArrayList<>();
+
+		Collections.sort(data, new Comparator<ITemperature>() {
+			@Override
+			public int compare(ITemperature o1, ITemperature o2) {
+				return Double.compare(o2.getTemperature(), o1.getTemperature());
+			}
+		});
+
+		// Collections.sort(data, Collections.reverseOrder());
 
 		for (ITemperature iTemperature : data) {
-
-			if (iTemperature.getMonth().equals(month)) {
+			String mon = iTemperature.getMonth();
+			if (mon.equals(month) == true) {
 				filteredData.add(iTemperature);
 			}
 		}
@@ -196,25 +206,81 @@ public class IClimateAnalyzer_Impl implements IClimateAnalyzer_DAO {
 	@Override
 	public ArrayList<ITemperature> allCountriesGetTop10LowestTemp() {
 		// TODO Auto-generated method stub
-		return null;
+		List<ITemperature> data = wDao.readDataFromFile();
+
+		Collections.sort(data, new Comparator<ITemperature>() {
+			@Override
+			public int compare(ITemperature o1, ITemperature o2) {
+				return Double.compare(o2.getTemperature(), o1.getTemperature());
+			}
+		});
+		Collections.reverse(data);
+
+		return (ArrayList<ITemperature>) data;
 	}
 
 	@Override
 	public ArrayList<ITemperature> allCountriesGetTop10HighestTemp() {
 		// TODO Auto-generated method stub
-		return null;
+		List<ITemperature> data = wDao.readDataFromFile();
+
+		Collections.sort(data, new Comparator<ITemperature>() {
+			@Override
+			public int compare(ITemperature o1, ITemperature o2) {
+				return Double.compare(o2.getTemperature(), o1.getTemperature());
+			}
+		});
+		return (ArrayList<ITemperature>) data;
 	}
 
 	@Override
 	public ArrayList<ITemperature> allCountriesGetAllDataWithinTempRange(double lowRangeTemp, double highRangeTemp) {
 		// TODO Auto-generated method stub
-		return null;
+		List<ITemperature> data = wDao.readDataFromFile();
+		List<ITemperature> filteredData = new ArrayList<ITemperature>();
+
+		for (ITemperature iTemperature : data) {
+			double temp = iTemperature.getTemperature();
+
+			if (temp > lowRangeTemp && temp < highRangeTemp) {
+				filteredData.add(iTemperature);
+
+			}
+		}
+
+		return (ArrayList<ITemperature>) filteredData;
 	}
 
 	@Override
 	public ArrayList<ITemperature> allCountriesTop10TempDelta(String month, int year1, int year2) {
 		// TODO Auto-generated method stub
-		return null;
+
+		List<ITemperature> data = wDao.readDataFromFile();
+		List<ITemperature> filteredData = new ArrayList<ITemperature>();
+
+		double lowestTemp = 400;
+		double highestTemp = -400;
+
+		for (ITemperature iTemperature : data) {
+
+			double year = iTemperature.getYear();
+			double temp = iTemperature.getTemperature();
+			String mon = iTemperature.getMonth();
+
+			if (year1 < year && year < year2 && mon.equals(month)) {
+
+				if (temp < lowestTemp) {
+					lowestTemp = temp;
+
+					if (temp > highestTemp) {
+						highestTemp = temp;
+						filteredData.add(iTemperature);
+					}
+				}
+			}
+		}
+
+		return (ArrayList<ITemperature>) filteredData;
 	}
 
 	@Override

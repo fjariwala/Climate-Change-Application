@@ -1,11 +1,30 @@
-package com.bean.Entity;
+package climatechange;
 
-public class ITemperature {
+import java.util.Comparator;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
+
+public class ITemperature implements Comparator<ITemperature> {
+
+	@CsvBindByName(column = "temperature")
+	@CsvBindByPosition(position = 0)
 	private double temperature;
+
+	@CsvBindByName(column = "year")
+	@CsvBindByPosition(position = 1)
 	private int year;
+
+	@CsvBindByName(column = "month")
+	@CsvBindByPosition(position = 2)
 	private String month;
+
+	@CsvBindByName(column = "country")
+	@CsvBindByPosition(position = 3)
 	private String country;
+
+	@CsvBindByName(column = "country3LetterCode")
+	@CsvBindByPosition(position = 4)
 	private String country3LetterCode;
 
 	public String getCountry() {
@@ -53,6 +72,17 @@ public class ITemperature {
 	public String toString() {
 		return "ITemperature [temperature=" + temperature + ", year=" + year + ", month=" + month + ", country="
 				+ country + ", country3LetterCode=" + country3LetterCode + "]";
+	}
+
+//	@Override
+//	public int compareTo(ITemperature s) {
+//		return Integer.compare(s.getTemperature(), getTemperature());
+//	}
+
+	@Override
+	public int compare(ITemperature o1, ITemperature o2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
